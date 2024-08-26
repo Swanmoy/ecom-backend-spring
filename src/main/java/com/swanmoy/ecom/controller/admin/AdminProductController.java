@@ -33,4 +33,17 @@ public class AdminProductController {
         return ResponseEntity.ok(products);
     }
 
+    @GetMapping("/search/{name}")
+    public ResponseEntity<List<ProductDto>> getAllProductsByName(@PathVariable String name){
+        List<ProductDto> products=adminProductService.getAllProductsByName(name);
+        return ResponseEntity.ok(products);
+    }
+    @DeleteMapping("/product/{productId}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable long productId){
+        boolean deleted= adminProductService.deleteProduct(productId);
+        if(deleted){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
 }
