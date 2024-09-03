@@ -1,5 +1,6 @@
 package com.swanmoy.ecom.controller.Customer;
 
+import com.swanmoy.ecom.dto.ProductDetailDto;
 import com.swanmoy.ecom.dto.ProductDto;
 import com.swanmoy.ecom.services.Customer.CustomerProductService;
 import lombok.RequiredArgsConstructor;
@@ -30,5 +31,15 @@ public class CustomerProductController {
     public ResponseEntity<List<ProductDto>> getAllProductsByName(@PathVariable String name){
         List<ProductDto> products=customerProductService.searchProductByTitle(name);
         return ResponseEntity.ok(products);
+    }
+
+    @GetMapping("/product/{productId}")
+    public ResponseEntity<?> getProductDetailById(@PathVariable Long productId){
+        ProductDetailDto productDetailDto=customerProductService.getProductDetailById(productId);
+        if(productDetailDto==null){
+            return ResponseEntity.notFound().build();
+        }else{
+            return ResponseEntity.ok(productDetailDto);
+        }
     }
 }
