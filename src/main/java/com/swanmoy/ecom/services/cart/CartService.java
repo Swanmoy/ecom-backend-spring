@@ -6,6 +6,7 @@ import com.swanmoy.ecom.dto.PlaceOrderDto;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface CartService {
     ResponseEntity<?> addProductToCart(AddProductInCartDto addProductInCartDto);
@@ -16,4 +17,5 @@ public interface CartService {
     OrderDto decreaseProductQuantity(AddProductInCartDto addProductInCartDto);
     OrderDto placeOrder(PlaceOrderDto placeOrderDto);
     List<OrderDto> getMyPlacedOrders(Long userId);
+    public OrderDto searchOrderByTrackingId(UUID trackingId);
 }

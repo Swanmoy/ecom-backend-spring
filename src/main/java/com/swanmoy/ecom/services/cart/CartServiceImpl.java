@@ -172,4 +172,13 @@ public class CartServiceImpl implements CartService{
         List<OrderStatus> orderStatusList=List.of(OrderStatus.Placed, OrderStatus.Shipped, OrderStatus.Delivered);
         return orderRepository.findAllByUserIdAndOrderStatusIn(userId, orderStatusList).stream().map(Order::getOrderDto).toList();
     }
+
+    public OrderDto searchOrderByTrackingId(UUID trackingId){
+        Optional<Order> optionalOrder=orderRepository.findByTrackingId(trackingId);
+        if(optionalOrder.isPresent()) {
+            return optionalOrder.get().getOrderDto();
+        }else{
+            return null;
+        }
+    }
 }

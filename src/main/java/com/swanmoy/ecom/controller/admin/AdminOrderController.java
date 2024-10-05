@@ -1,5 +1,6 @@
 package com.swanmoy.ecom.controller.admin;
 
+import com.swanmoy.ecom.dto.AnalyticsResponseDto;
 import com.swanmoy.ecom.dto.OrderDto;
 import com.swanmoy.ecom.services.admin.adminOrder.AdminOrderService;
 import lombok.RequiredArgsConstructor;
@@ -34,5 +35,10 @@ public class AdminOrderController {
         }else{
             return ResponseEntity.ok(orderDto);
         }
+    }
+
+    @GetMapping("/order/analytics")
+    public ResponseEntity<AnalyticsResponseDto> getAnalytics(){
+        return ResponseEntity.ok(adminOrderService.calculateAnalytics());
     }
 }
